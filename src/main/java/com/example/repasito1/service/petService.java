@@ -8,6 +8,7 @@ import com.example.repasito1.dto.Pet.PetResponseDTO;
 import com.example.repasito1.dto.User.UserSimpleDTO;
 import com.example.repasito1.infrastructure.UserRepository;
 import com.example.repasito1.infrastructure.petRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,20 @@ public class petService {
     //save() es un metodo de Spring Data JPA que guarda el objeto en la base de datos.
     //Si newPet no tiene ID, lo inserta como nuevo.
     //Si newPet ya tiene un ID existente , lo actualiza.
+    @Transactional
     public PetResponseDTO createPet(PetCreateDTO petCreateDTO) {
         Long userId = getCurrentUserID();
+
+        if (petCreateDTO.getName() == null || petCreateDTO.getName().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la mascota no puede estar vacío");
+        } else if (petCreateDTO.getType() == null || petCreateDTO.getType().isEmpty()) {
+            throw new IllegalArgumentException("El tipo de mascota no puede estar vacío");
+        } else if (petCreateDTO.getImageUrl() == null || petCreateDTO.getImageUrl().isEmpty()) {
+            throw new IllegalArgumentException("La URL de la imagen no puede estar vacía");
+        } else if (petCreateDTO.getDescription().length() < 10 || petCreateDTO.getDescription().length() > 500) {
+            throw new IllegalArgumentException("La descripción debe tener entre 10 y 500 caracteres");
+        }
+
         User owner = userRepository.findById(userId)
                 .orElseThrow();
 

@@ -1,4 +1,4 @@
-package com.example.petworld.dto;
+package com.example.repasito1.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
