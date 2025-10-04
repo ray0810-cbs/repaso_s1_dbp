@@ -13,11 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private final UserService UserService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
-        this.UserService = UserService;
+        this.userService = userService;
     }
 
     // === Endpoints ===

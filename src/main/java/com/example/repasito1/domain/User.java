@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "user")
 @Getter
@@ -20,4 +23,7 @@ public class User {
     private String username;
     private String password;
     private String email;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<pet> pets= new ArrayList<>();
 }

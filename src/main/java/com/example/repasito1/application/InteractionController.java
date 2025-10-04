@@ -16,7 +16,7 @@ public class InteractionController {
     private final InteractionService InteractionService;
 
     @Autowired
-    public InteractionController(InteractionService interactionService) {
+    public InteractionController(InteractionService InteractionService) {
         this.InteractionService = InteractionService;
     }
 

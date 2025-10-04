@@ -1,6 +1,8 @@
 package com.example.repasito1.application;
 
 import com.example.repasito1.domain.pet;
+import com.example.repasito1.dto.Pet.PetCreateDTO;
+import com.example.repasito1.dto.Pet.PetResponseDTO;
 import com.example.repasito1.infrastructure.petRepository;
 import com.example.repasito1.service.petService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,9 @@ public class petController {
     //ResponseEntity es el tipado q utilizamos en java cuando vamos a crear endpoints
     //dentro del <> se devuelve lo q vamos a devolver en el body
     //De preferencia q el request no tenga el mismo nombre que en el service
-    public ResponseEntity<pet> createPetController(@RequestBody pet newPet) {
+    public ResponseEntity<PetResponseDTO> createPetController(@RequestBody PetCreateDTO newPet) {
         //Vamos a tener q mandar un body en la solicitud del postman, q sea de tipo pet.
-        pet createPet = petService.createPet(newPet);
+        PetResponseDTO createPet = petService.createPet(newPet);
         return new ResponseEntity<>(createPet, HttpStatus.CREATED);
         //Esto es para que nos mande un mensaje http al crear el pet,
         // q nos diga que el pet ya ha sido creado

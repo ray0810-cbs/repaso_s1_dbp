@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,18 +27,19 @@ public class pet {
     private String type;
     private String imageUrl;
 
-    private Integer hunger=100;
-    private Integer happiness=100;
-    private Integer health=100;
-    private Integer energy=100;
+    // Estados de la mascota
+    private Integer hunger = 100; // 0-100
+    private Integer happiness = 100; // 0-100
+    private Integer health = 100; // 0-100
+    private Integer energy = 100; // 0-100
 
-    private LocalDate lastInteraction;
-    private LocalDate createdAt;
+    private LocalDateTime lastInteraction; // Último momento de interacción
+    private LocalDateTime createdAt; // Fecha de creación/adopción
 
     //Muchas mascotas para un mismo usuario
     @ManyToOne
     @JoinColumn(name="owner_id")
-    private User user;
+    private User owner;
 
     //Muchas interacciones para una mascota
     //El cascade hace que todas las operaciones sobre el pet se aplicaran tambien a interactions
