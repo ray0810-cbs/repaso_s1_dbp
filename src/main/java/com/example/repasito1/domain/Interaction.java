@@ -6,18 +6,25 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "user")
+@Table(name = "interaction")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class Interaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    // === Attributes and Constructor ===
-    private String username;
-    private String password;
-    private String email;
+
+    private String type;
+    private Integer value;
+    private String description;
+    private LocalDateTime timestamp;
+
+    @ManyToOne
+    @JoinColumn(name="pet_id")
+    private pet pet;
+    // === Attributes and Constructor === 
 }
